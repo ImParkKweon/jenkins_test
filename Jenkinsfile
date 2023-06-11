@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // GitHub 저장소를 클론합니다.
-                git credentialsId: 'github_access_token', url: 'https://github.com/ImParkKweon/product.git'
+                git 'https://github.com/ImParkKweon/product.git'
             }
         }
         
