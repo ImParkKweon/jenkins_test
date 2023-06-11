@@ -32,11 +32,11 @@ pipeline {
             }
         }
 
-        stage {
-            steps {
-				sh 'echo $GITHUB_CRED_PSW | git login -u $GITHUB_CRED_USR --password-stdin'
-			}
-        }
+        // stage (''){
+        //     steps {
+		// 		sh 'echo $GITHUB_CRED_PSW | git login -u $GITHUB_CRED_USR --password-stdin'
+		// 	}
+        // }
         
         stage('Commit and Push Changes') {
             steps {
