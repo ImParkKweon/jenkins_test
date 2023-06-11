@@ -1,12 +1,19 @@
 pipeline {
+    environment {
+		GITHUB_CRED = credentials('github_access_token')
+	}
+
     agent any
 
     stages {
-        stage('Clone Repository') {
+        stage('Git Pull Repository') {
             steps {
                 script {
                     // GitHub 저장소를 클론합니다.
-                    sh "git clone https://github.com/ImParkKweon/product.git"
+                    sh "git config --global user.email hyunjun1325@icloud.com"
+                    sh "git config --global user.name nowjun"
+                    sh "git remote add https://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@github.com/ImParkKweon/product.git"
+                    sh "git pull origin main" 
                 }
                 
             }
@@ -23,6 +30,12 @@ pipeline {
                     writeFile(file: 'product/backend/deploy_mod.yaml', text: modifiedCode)
                 }
             }
+        }
+
+        stage {
+            steps {
+				sh 'echo $GITHUB_CRED_PSW | git login -u $GITHUB_CRED_USR --password-stdin'
+			}
         }
         
         stage('Commit and Push Changes') {
